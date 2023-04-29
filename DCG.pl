@@ -6,9 +6,9 @@ st(l()) --> [].
 lf(l(S)) --> loop(S).
 lf(l()) --> [].
 stif(l(T)) --> loop(T) | stmnt(T).
-stwhile --> ifcondition(T) | stmnt(T).
-loop(l(V,R,C,L,T)) --> lv(V), rb(R), condition(C), lb(L), stwhile(T) .
-loop(l(V,R,C,L,T)) --> lv(V), rb(R), condition(C), lb(L), stwhile(T) | lv(V), rb(R), condition(C), lb(L), stwhile(T).
+stwhile(l(T)) --> ifcondition(T) | stmnt(T).
+loop(l(V,R,C,L,T)) --> lv(V), rb(R), condition(C), lb(L), loop(T) .
+loop(l(V,R,C,L,T)) --> lv(V), rb(R), condition(C), lb(L), stwhile(T).
 ifcondition(l(I,R,C,L,S,O,E)) --> ifd(I), rb(R), condition(C), lb(L), stif(S), els(O), stif(E) | ifd(I), rb(R), condition(C), lb(L), stif(S), els(O), ifcondition(E) | ifd(I), rb(R), condition(C), lb(L), ifcondition(S), els(O), ifcondition(E) | ifd(I), rb(R), condition(C), lb(L), ifcondition(S), els(O), stif(E) .
 ifcondition(l(I,R,C,L,S)) --> ifd(I), rb(R), condition(C), lb(L), stif(S) | ifd(I), rb(R), condition(C), lb(L), ifcondition(S).
 condition(l(V,C,E)) --> variables(V), comp(C), variables(E) | variables(V), comp(C), number(E) | number(V), comp(C), variables(E).
